@@ -111,6 +111,14 @@ GEM
       rspec-support (= 3.0.0.rc1)
     rspec-mocks (3.0.0.rc1)
       rspec-support (= 3.0.0.rc1)
+    rspec-rails (3.0.0.rc1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (= 3.0.0.rc1)
+      rspec-expectations (= 3.0.0.rc1)
+      rspec-mocks (= 3.0.0.rc1)
+      rspec-support (= 3.0.0.rc1)
     rspec-support (3.0.0.rc1)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -121,6 +129,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    shoulda-matchers (2.6.1)
+      activesupport (>= 3.0.0)
     slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -157,8 +167,10 @@ DEPENDENCIES
   pry-nav
   pry-stack_explorer
   rails (= 4.0.3)
-  rspec (~> 3.0.0.beta2)
+  rspec (~> 3.0.0.rc1)
+  rspec-rails (~> 3.0.0.rc1)
   sass-rails (~> 4.0.0)
   sdoc
+  shoulda-matchers
   sqlite3
   uglifier (>= 1.3.0)
