@@ -13,7 +13,7 @@ group :production do
   gem 'uglifier', '>= 1.3.0'
 end
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
 
   gem 'pry'

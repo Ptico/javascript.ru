@@ -7,62 +7,96 @@ describe QuizHandler do
   let(:question_one)   { create(:question) }
   let(:question_two)   { create(:question) }
   let(:question_three) { create(:question) }
+  let(:data) do
+    {
+      quiz_id: quiz.id,
+      answer: 'foo'
+    }
+  end
 
-  describe '#next_question' do
-    subject { instance.next_question }
+  before(:each) do
+    quiz.questions << question_one
+    quiz.questions << question_two
+    quiz.questions << question_three
+  end
 
-    let(:data) do
-      {
-        quiz_id: quiz.id,
-        answer: 'foo'
-      }
-    end
+  context 'when started' do
+    before(:each) { data.delete(:answer) }
 
-    before(:each) do
-      quiz.questions << question_one
-      quiz.questions << question_two
-      quiz.questions << question_three
-    end
+    let(:session) { Hash.new }
 
-    context 'when started' do
-      let(:session) { Hash.new }
+    describe '#next_question' do
+      subject { instance.next_question }
 
       it 'returns first question' do
         expect(subject).to eql(question_one)
       end
     end
 
-    context 'when continued' do
-      let(:session) do
-        {
-          quiz: {
-            quiz.id => {
-              current_question: question_two.id
-            }
+    describe '#finished?' do
+      subject { instance.finished? }
+
+      it 'negative' do
+        expect(subject).to be(false)
+      end
+    end
+  end
+
+  context 'when continued' do
+    let(:session) do
+      {
+        quiz: {
+          quiz.id => {
+            question: question_two.id
           }
         }
-      end
+      }
+    end
+
+    describe '#next_question' do
+      subject { instance.next_question }
 
       it 'returns next question' do
         expect(subject).to eql(question_three)
       end
     end
 
-    context 'when finished' do
-      let(:session) do
-        {
-          quiz: {
-            quiz.id => {
-              current_question: question_three.id
-            }
+    describe '#finished?' do
+      subject { instance.finished? }
+
+      it 'negative' do
+        expect(subject).to be(false)
+      end
+    end
+  end
+
+  context 'when finished' do
+    let(:session) do
+      {
+        quiz: {
+          quiz.id => {
+            question: question_three.id
           }
         }
-      end
+      }
+    end
+
+    describe '#next_question' do
+      subject { instance.next_question }
 
       it 'returns nil' do
         expect(subject).to be(nil)
       end
     end
+
+    describe '#finished?' do
+      subject { instance.finished? }
+
+      it 'positive' do
+        expect(subject).to be(true)
+      end
+    end
+
   end
 
 end
