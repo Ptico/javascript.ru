@@ -9,6 +9,6 @@ describe Question do
   describe 'associations' do
     it { is_expected.to belong_to(:quiz) }
     it { is_expected.to have_many(:answers).dependent(:destroy) }
-    xit { is_expected.to have_and_belong_to_many(:specialities) }
+    it { is_expected.to have_and_belong_to_many(:specialities) }
   end
 end

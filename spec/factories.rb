@@ -8,4 +8,8 @@ FactoryGirl.define do
     body        { Faker::Lorem.sentence }
     explanation { Faker::Lorem.sentence }
   end
+
+  factory :speciality do
+    name { Faker::Lorem.word }
+  end
 end
